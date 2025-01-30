@@ -1,18 +1,15 @@
 services:
   db:
-    image: alvicha/mi_cine:v1
-    container_name: cine
-    environment:
-      MYSQL_ROOT_PASSWORD: contrasenyaRoot
-      MYSQL_DATABASE: cine
-      MYSQL_USER: usuario1
-      MYSQL_PASSWORD: contrasenyaUsuario1
+    image: rsanzfloridauni/mi_cine:latest
+    container_name: contenedor_mi_cine
+    restart: unless-stopped
     ports:
       - "3306:3306"
 
   php:
-    image: alvicha/mi_app_cine:v1
-    container_name: contenedorMiApp
+    image: rsanzfloridauni/mi_app_cine:latest
+    container_name: contenedor_mi_app
+    restart: unless-stopped
     ports:
       - "8080:80"
     depends_on:
@@ -20,7 +17,8 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: contenedorPhpMyAdmin
+    container_name: contenedor_phpmyadmin
+    restart: unless-stopped
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: contrasenyaRoot
