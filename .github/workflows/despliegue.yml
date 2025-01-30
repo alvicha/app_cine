@@ -22,15 +22,15 @@ jobs:
 
       # Construir y subir la imagen de la base de datos
       - name: Build and push DB Docker image
-        working-directory: ./mysql
         run: |
+          cd mysql
           docker build -t ${{ secrets.DOCKER_USERNAME }}/mi_cine:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/mi_cine:latest
 
       # Construir y subir la imagen de la aplicación
       - name: Build and push PHP Docker image
-        working-directory: ./php
         run: |
+          cd php
           docker build -t ${{ secrets.DOCKER_USERNAME }}/mi_app_cine:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/mi_app_cine:latest
 
